@@ -12,8 +12,6 @@ void UTankMovementComponent::Initalize(UTankTrack* LeftTrackToSet, UTankTrack* R
 
 void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed)
 {
-	//UE_LOG(LogTemp, Warning, TEXT("Tank %s: vecotring to %s"), *Name, *MoveVelocity.GetSafeNormal().ToString());
-
 	// No need to call super as we're replacing the functionality
 	auto TankForward = GetOwner()->GetActorForwardVector().GetSafeNormal();
 	auto AIForwardIntention = MoveVelocity.GetSafeNormal();
