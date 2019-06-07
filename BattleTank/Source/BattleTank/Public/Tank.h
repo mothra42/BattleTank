@@ -12,7 +12,6 @@ class UTankBarrel;
 class UTankTurret;
 class AProjectile;
 class UTankAimingComponent;
-class UTankMovementComponent;
 
 UCLASS()
 class BATTLETANK_API ATank : public APawn
@@ -22,13 +21,12 @@ class BATTLETANK_API ATank : public APawn
 public:
 	// Sets default values for this pawn's properties
 	ATank();
+	//For whatever reason this is breaking the movement component, need to re add it in blueprint when this is removed
+	virtual void BeginPlay() override;
 
 protected:
 	UPROPERTY(BlueprintReadOnly)
 	UTankAimingComponent* TankAimingComponent = nullptr;
-
-	UPROPERTY(BlueprintReadOnly)
-	UTankMovementComponent* TankMovementComponent = nullptr;
 
 public:
 	void AimAt(FVector HitLocation);
@@ -40,6 +38,7 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	TSubclassOf<AProjectile> ProjectileBlueprint;
 
+	//TODO remove once firing is moved to the aiming component
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float LaunchSpeed = 4000.0;
 
