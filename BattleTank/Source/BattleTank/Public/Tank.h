@@ -11,7 +11,6 @@
 class UTankBarrel;
 class UTankTurret;
 class AProjectile;
-class UTankAimingComponent;
 
 UCLASS()
 class BATTLETANK_API ATank : public APawn
@@ -24,13 +23,7 @@ public:
 	//For whatever reason this is breaking the movement component, need to re add it in blueprint when this is removed
 	virtual void BeginPlay() override;
 
-protected:
-	UPROPERTY(BlueprintReadOnly)
-	UTankAimingComponent* TankAimingComponent = nullptr;
-
 public:
-	void AimAt(FVector HitLocation);
-
 	UFUNCTION(BlueprintCallable, Category = "Firing")
 	void Fire();
 
