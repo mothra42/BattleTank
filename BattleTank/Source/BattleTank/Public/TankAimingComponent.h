@@ -40,15 +40,16 @@ public:
 	void Fire();
 
 	UFUNCTION(BlueprintCallable, Category = "Firing")
-	int GetAmmoCount() const;
+	int32 GetAmmoCount() const;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	int32 AmmoCount = 20;
 
 	EFiringState GetFiringState() const;
 
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "State")
 	EFiringState FiringState = EFiringState::Aiming;
-
-	int AmmoCount = 10;
 
 	virtual void BeginPlay() override;
 
@@ -67,7 +68,7 @@ private:
 	float LaunchSpeed = 4000.0;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-	float ReloadTimeInSeconds = 3;
+	float ReloadTimeInSeconds = 2.0;
 
 	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
 
