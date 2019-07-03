@@ -5,6 +5,7 @@
 #include "Engine/World.h"
 #include "TankPlayerController.h"
 #include "TankAimingComponent.h"
+#include "Tank.h" // So we can impliment OnDeath
 
 void ATankAIController::BeginPlay()
 {
@@ -32,4 +33,22 @@ void ATankAIController::Tick(float DeltaTime)
 	{
 		AimingComponent->Fire();
 	}
+}
+
+void ATankAIController::SetPawn(APawn* InPawn)
+{
+	Super::SetPawn(InPawn);
+	if (InPawn)
+	{
+		auto PossessedTank = Cast<ATank>(InPawn);
+		if (!ensure(PossessedTank)) { return; }
+
+		//TODO Subscribe our local method to the tank's death event
+		PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankAIController::OnDeath);
+	}
+}
+
+void ATankAIController::OnDeath()
+{
+	UE_LOG(LogTemp, Warning, TEXT("I broadcasted from tank ai controller"));
 }

@@ -16,11 +16,10 @@ float ATank::TakeDamage(float DamageAmount, struct FDamageEvent const & DamageEv
 	int32 DamageToApply = FMath::Clamp<int32>(DamagePoints, 0, CurrentHealth);
 
 	CurrentHealth -= DamageToApply;
-	if (CurrentHealth < 0)
+	if (CurrentHealth <= 0)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("TANK IS DEAD"));
+		OnDeath.Broadcast();
 	}
-	UE_LOG(LogTemp, Warning, TEXT("DamageToApply is %i, CurrentHealth is %i"), DamageToApply, CurrentHealth);
 
 	return DamageToApply;
 }
