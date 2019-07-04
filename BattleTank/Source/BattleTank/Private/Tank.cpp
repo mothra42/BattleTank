@@ -9,6 +9,13 @@ ATank::ATank()
 	PrimaryActorTick.bCanEverTick = false;
 }
 
+void ATank::BeginPlay()
+{
+	Super::BeginPlay();
+
+	CurrentHealth = StartingHealth;
+}
+
 float ATank::TakeDamage(float DamageAmount, struct FDamageEvent const & DamageEvent, class AController* EventInstigator, AActor* DamageCauser) {
 	Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
 
@@ -26,5 +33,6 @@ float ATank::TakeDamage(float DamageAmount, struct FDamageEvent const & DamageEv
 
 float ATank::GetHealthPercent() const
 {
+	UE_LOG(LogTemp, Warning, TEXT("Starting health is %i, Current Health is %i"), StartingHealth, CurrentHealth);
 	return (float)CurrentHealth / (float)StartingHealth;
 }
